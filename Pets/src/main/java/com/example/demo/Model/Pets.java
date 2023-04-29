@@ -2,6 +2,8 @@ package com.example.demo.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,9 +12,12 @@ import jakarta.persistence.Table;
 public class Pets 
 {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="Pet")
 	private int pid;
 	private String pname;
+	private String uname;
+	private String pwd;
 	private String ptype;
 	private String pbreed;
 	private String pgender;
@@ -60,6 +65,7 @@ public class Pets
 	public String getPorigin() {
 		return porigin;
 	}
+
 	public void setPorigin(String porigin) {
 		this.porigin = porigin;
 	}
@@ -80,6 +86,18 @@ public class Pets
 	}
 	public void setPlocation(String plocation) {
 		this.plocation = plocation;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 	
 
