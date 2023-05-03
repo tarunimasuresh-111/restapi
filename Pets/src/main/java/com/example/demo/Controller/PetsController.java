@@ -1,8 +1,6 @@
 package com.example.demo.Controller;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.Model.Pets;
 import com.example.demo.Repository.PetsRepository;
 import com.example.demo.Service.PetsService;
@@ -61,29 +58,11 @@ public class PetsController
     	return pser.paginationData(pid,porigin);
     }
     @GetMapping("/pag/{no}/{siz}/{name}")
-    public List<Pets> pagina(@PathVariable ("nu") int no, @PathVariable("siz") int siz,@PathVariable("name") String name)
+    public List<Pets> pagina(@PathVariable ("no") int no, @PathVariable("siz") int siz,@PathVariable("name") String name)
     {
     	return pser.paginationAndSorting(no, siz, name);
     }
-    @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> loginData)
-    {
-    	String uname =loginData.get("uname");
-    	String pwd=loginData.get("pwd");
-    	String result=pser.checkLogin(uname, pwd);
-    	return result;
-    }
-    @PostMapping("/adduser")
-    public Pets AddUser(@RequestBody Pets pr)
-    {
-    	return pser.addUser(pr);
-    }
-    @GetMapping
-    public List<Pets> listAll()
-    {
-    	return pser.getUser();
-    }
+ 
     
-   
-
+    
 }

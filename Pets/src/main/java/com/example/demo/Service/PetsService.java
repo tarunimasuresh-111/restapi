@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.Model.Pets;
+import com.example.demo.Repository.LoginRepository;
 import com.example.demo.Repository.PetsRepository;
 
 @Service
@@ -16,6 +16,7 @@ public class PetsService
 {
 	@Autowired
 	public PetsRepository prepo;
+	public LoginRepository lrepo;
 	//posting the information
 	public  Pets saveinfo(Pets p)
 	{
@@ -50,33 +51,7 @@ public class PetsService
 		Page<Pets> p=prepo.findAll(PageRequest.of(pageNo,  pageSize, Sort.by(pname).ascending()));
 		return p.getContent();
 	}
-	public String checkLogin(String uname,String pwd)
-	{
-	Pets user = prepo.findByuname(uname);
-	if(user == null)
-	{
-		return "no user found";
+	public String checkLogin(String uname, String pwd) {
+		return null;
 	}
-	else
-	{
-		if(user.getPwd().equals(pwd))
-		{
-			return "Login Successfull";
-		}
-		else
-		{
-			return "Login Failed";
-		}
-	}
-	}
-	public Pets addUser(Pets pr)
-	{
-		return prepo.save(pr);
-	}
-	public List<Pets> getUser()
-	{
-		return prepo.findAll();
-	}
-	
-	
 }
