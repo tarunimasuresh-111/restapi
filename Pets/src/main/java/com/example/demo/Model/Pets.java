@@ -1,8 +1,11 @@
 package com.example.demo.Model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,7 +23,11 @@ public class Pets
 	private String porigin;
 	private String page;
 	private String pcolour;
-	private String plocation;
+	
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn
+	private PetsLocation pl;
 	public int getPid() {
 		return pid;
 	}
@@ -76,11 +83,13 @@ public class Pets
 	public void setPcolour(String pcolour) {
 		this.pcolour = pcolour;
 	}
-	public String getPlocation() {
-		return plocation;
+	public PetsLocation getPl() {
+		return pl;
 	}
-	public void setPlocation(String plocation) {
-		this.plocation = plocation;
+	public void setPl(PetsLocation pl) {
+		this.pl = pl;
+	}
+	
 	}	
 
-}
+

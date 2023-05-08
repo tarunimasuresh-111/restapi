@@ -14,11 +14,14 @@ import com.example.demo.Model.Pets;
 import com.example.demo.Repository.PetsRepository;
 import com.example.demo.Service.PetsService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 public class PetsController 
 {
 	@Autowired
 	public PetsService pser;
+	@Autowired
 	public PetsRepository prepo;
 	@PostMapping("/Pets")
 	public Pets addDetails(@RequestBody Pets pr)
@@ -62,7 +65,36 @@ public class PetsController
     {
     	return pser.paginationAndSorting(no, siz, name);
     }
+    
+    
+    @Tag(name="Native Query",description = "Getting Details")
+    @GetMapping("/getByNative")
+	public List<Pets> fetchAllPets(){
+		return prepo.getAllData();
+	}
+	
+	@Tag(name="Native Query",description="Delete by id")
+	@DeleteMapping("deleteNative/{pid}")
+	public String deleteNative(@PathVariable("pid") int pid)
+	{
+		prepo.deleteById(pid);
+		return "Deleted By NativeQuery";
+	}
+	
+	@Tag(name="Native Query",description = "Update Details ")
+	@PutMapping("updateNative/{page}/{pname}")
+	public String updateQuery(@PathVariable("page") String page,@PathVariable("pname") String pname)
+	{
+	   prepo.updateQuery(page, pname);
+		return "updated Suucessfully";
+		
+	}
  
+	@Tag(name="Native Query",description = "get DEtails by pname")
+	@GetMapping("/jpql/{pname}")
+	public List<Pets> updatejpql(@PathVariable("pname") String pname){
+		return prepo.get(pname);
+	}
     
     
 }
